@@ -33,12 +33,17 @@ def numvals(df):
     df_clean = df.drop(' pm25', axis = 1).drop(' pm10', axis = 1).drop(' o3', axis = 1).drop(' no2', axis = 1).drop(' so2', axis = 1).drop(' co', axis = 1)
     return df_clean
 
-def pipeline(filename):
+def pickler(df, new_filename):
+    filepath = "../data/pickles/" + str(new_filename) + ".pkl"
+    df.to_pickle(filepath)
+
+def clean_pipeline(filename, new_filename):
     raw_df = import_csv(filename)
     dated_df = datetime_df(raw_df)
     nan_df = nan(dated_df)
     clean_df = numvals(nan_df)
-    return clean_df
+    pickler(clean_df, new_filename)
+    print('The pickles are in the fridge!')
 
-if __name__ == __main__:
-
+if __name__ == '__main__':
+    clean_pipeline('i-25-denver, colorado, usa-air-quality.csv', 'denver')
