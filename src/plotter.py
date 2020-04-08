@@ -4,7 +4,6 @@ import datetime
 import matplotlib.pyplot as plt
 import os
 
-plt.style.use('ggplot')
 
 #dictionary where the keys are the name of the picklefile,
 # and the values are a list of 
@@ -15,19 +14,19 @@ plt.style.use('ggplot')
 # a quarantine or shelter in place (0 = the value won't display)
 plot_dict = {
     'beijing': ['Beijing', 0, 0],
-    'dallas': ['Dallas', 69, 82],
-    'denver': ['Denver', 64, 83],
-    'houston': ['Houston', 69, 84],
-    'la': ['Los Angeles', 26, 83],
-    'madrid' : ['Madrid', 31, 73],
-    'nyc' : ['New York City', 61, 80],
-    'oakland' : ['Oakland', 26, 76],
-    'paris' : ['Paris', 24, 77],
-    'santiago' : ['Santiago de Chile', 63, 86],
-    'saopaulo' : ['São Paulo', 66, 81],
-    'seattle' : ['Seattle', 21, 83],
-    'sydney' : ['Sydney', 32, 89],
-    'wuhan' : ['Wuhan', 0, 23]
+    'dallas': ['Dallas', 67, 81],
+    'denver': ['Denver', 63, 82],
+    'houston': ['Houston', 68, 83],
+    'la': ['Los Angeles', 25, 82],
+    'madrid' : ['Madrid', 30, 72],
+    'nyc' : ['New York City', 60, 79],
+    'oakland' : ['Oakland', 25, 75],
+    'paris' : ['Paris', 23, 78],
+    'santiago' : ['Santiago de Chile', 62, 85],
+    'saopaulo' : ['São Paulo', 65, 80],
+    'seattle' : ['Seattle', 20, 82],
+    'sydney' : ['Sydney', 31, 88],
+    'wuhan' : ['Wuhan', 0, 22]
     }
 
 def unpickle(filename):
@@ -35,14 +34,14 @@ def unpickle(filename):
     return df
 
 def moving_day_average(df, col_name, day_range = 9):
-    col = np.arange(0,len(df)).reshape(-1,1)
-    row = np.arange(0, day_range+1)
+    col = np.arange(0, len(df) - day_range +1).reshape(-1,1)
+    row = np.arange(0, day_range)
     mat = col + row
-    windows = []
-    for i in range(0, len(df) -10):
-        index = range(mat[i][0], mat[i][day_range])
-        windows.append(np.nanmean(df[col_name].iloc[index]))
-    return windows
+    col_array = df[col_name].to_numpy()
+    indexed = col_array[mat]
+    return np.nanmean(indexed, axis =1)
+
+
 
 # this will return scatterplots for pm2.5 and n02 concentrations for the picklefile passed in
 def scatter_concentrations(picklename, city_name):
@@ -62,6 +61,8 @@ def scatter_concentrations(picklename, city_name):
     ax.legend(loc='best')
     fig.tight_layout(pad=1)
     fig.savefig(save_name, dpi=125)
+    plt.close(fig)
+
 
 
 #this function will plot moving day average  values for NO2 (default) or PM25 for the first 3 months of each year
@@ -72,9 +73,9 @@ def q1_plotter(picklename, city_name, first_case_day = 0, shelter_day = 0, subst
     fig, ax = plt.subplots(figsize=(16,8))
     #plot the graph for each year
     for year in years:
-        df_q1 = df[df['date'] > datetime.datetime(year-1, 12, 27)]
-        df_q1 = df_q1[df_q1['date'] < datetime.datetime(year, 4, 6)]
-        x = np.arange(0, len(df_q1)-10, 1)
+        df_q1 = df[df['date'] > datetime.datetime(year-1, 12, int(31-(day_range - 1 )/ 2))]
+        df_q1 = df_q1[df_q1['date'] <= datetime.datetime(year, 4, int((day_range - 1 )/ 2))]
+        x = np.arange(0, len(df_q1)-day_range + 1, 1)
         y = moving_day_average(df_q1, substance, day_range)
         if year == 2020:
             ax.plot(x, y, linewidth = 3, label = str(year))
@@ -92,6 +93,7 @@ def q1_plotter(picklename, city_name, first_case_day = 0, shelter_day = 0, subst
     ax.set_ylabel(ylabel_)
     ax.legend(loc='best', ncol=3, fancybox=True, shadow=True)
     fig.savefig(save_name, dpi=125)
+    plt.close(fig)
 
 
 if __name__ == '__main__':
