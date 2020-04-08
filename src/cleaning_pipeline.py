@@ -63,6 +63,7 @@ file_picklename_dict = {
 'paris-air-quality.csv' : 'paris',
 'parque-d.pedro ii, são paulo, brazil-air-quality.csv' : 'saopaulo',
 'parque-o\'higgins, chile-air-quality.csv' : 'santiago',
+'chullora-sydney east, australia-air-quality.csv' : 'sydney',
 'queens-college, new york, usa-air-quality.csv' : 'nyc',
 'wuhan-air-quality (1).csv' : 'wuhan'}    
 
