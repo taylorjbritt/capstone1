@@ -89,7 +89,7 @@ def q1_plotter(picklename, city_name, first_case_day = 0, shelter_day = 0, subst
         ax.axvline(x = first_case_day, ls='--', c='red', label = "First COVID Case in Region")
     if shelter_day != 0:
         ax.axvline(x = shelter_day, ls='--', label = "Shelter in Place Order")
-    ax.set_xlabel('Days Into the Year')
+    ax.set_xlabel('Days Since January 1st')
     ax.set_ylabel(ylabel_)
     ax.legend(loc='best', ncol=3, fancybox=True, shadow=True)
     fig.savefig(save_name, dpi=125)
