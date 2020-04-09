@@ -4,7 +4,7 @@ For this project, I decided to investigate the effect that the COVID-19 epidemic
 
 ## The Data
 
-The World Air Quality Index Project is a small organization that collects readings from air quality monitoring stations around the world and standardizes them using E.P.A. guidelines into AQI, or Air Quality Index, units. Unfortunately, the type of airborne particle that different stations report is not uniform – all of the stations I looked at report PM<sub>2.5</sub> concentrations (particulate matter 2.5 micrometers or less), but reporting of PM<sub>10</sub> (between 2.5 and 10 micrometers). NO<sub>2</sub> (Nitrogen Dioxide), CO (carbon monoxide), and SO<sub>2</sub> (sulfur dioxide) is sporadic. Many stations have daily values dating back to September 1st, 2014, but quite a few began reporting more recently, and often there are gaps in the reporting, ranging from a day or two to several months. 
+The World Air Quality Index Project is a small organization that collects readings from air quality monitoring stations around the world and standardizes them using E.P.A. guidelines into AQI, or Air Quality Index, units. Unfortunately, the type of airborne particle that different stations report is not uniform – all of the stations I looked at report PM<sub>2.5</sub> concentrations (particulate matter 2.5 micrometers or less), but reporting of PM<sub>10</sub> (between 2.5 and 10 micrometers). NO<sub>2</sub> (Nitrogen Dioxide), CO (carbon monoxide), and SO<sub>2</sub> (sulfur dioxide) is sporadic. Many stations have daily values dating back to the beginning of 2014, but quite a few began reporting more recently, and often there are gaps in the reporting, ranging from a day or two to several months. 
 
 I had to download the datasets individually, so I decided to focus on stations that had PM<sub>2.5</sub> and  NO<sub>2</sub> dating back to 2014. The other pollutants were too sporadic to find data for in the range of cities I wanted to look at. Most NO<sub>2</sub> comes from automobile traffic and in burning fossil fuels, so it seemed like a good pollutant to focus on. 
 
@@ -23,23 +23,10 @@ I realized that a major obstacle to discerning if COVID-19 had lead to a signifi
 
 I subsequently created a pipeline script to clean other datasets and save them as picklefiles, and generated scatterplots for a number of other cities, including in the southern hemisphere where the pattern would likely be reversed if it was driven by weather. 
 
-Cities in Europe and China in the northern hemisphere seemed to generally follow the smame pattern. 
+Cities in Europe and China in the northern hemisphere seemed to generally follow the same pattern, while cities in the southern hemisphere were the opposite:
 
-![image](images/scatterplots/scattermadrid.png)
+![image](images/comparative_scatterplots/scattersantiagomadrid.png)
 
-![image](images/scatterplots/scatterparis.png)
-
-![image](images/scatterplots/scatterbeijing.png)
-
-![image](images/scatterplots/scatterwuhan.png)
-
-As I expected, the peaks and valleys were reversed in the southern hemisphere.
-
-![image](images/scatterplots/scattersydney.png)
-
-![image](images/scatterplots/scattersaopaulo.png)
-
-![image](images/scatterplots/scattersantiago.png)
 
 Given the periodicity of the concentrations, I thought it would make the most sense to plot the values for the first three months in different years to get a better sense how the trajectory of PM<sub>2.5</sub> and NO<sub>2</sub> was different. 
 

@@ -64,6 +64,28 @@ def scatter_concentrations(picklename, city_name):
     plt.close(fig)
 
 
+#this will generate pm2.5 and no2 scatterplots for two different dataframes
+def plot_concentrations_compare(picklename_1, city_name_1, picklename_2, city_name_2):
+    df1 = unpickle(picklename_1)
+    df2 = unpickle(picklename_2)
+    save_name = '../images/comparative_scatterplots/scatter' + picklename_1 + picklename_2 + '.png'
+    fig = plt.figure(figsize=(12,12))
+    ax = fig.add_subplot(2,1,1)
+    ax.scatter(df1['date'], df1['pm25'], color = 'blue', alpha = 1, label = city_name_1 )
+    ax.scatter(df2['date'], df2['pm25'], color = 'red', alpha = 1, label = city_name_2 )
+    ax.set_title(city_name_1 +" "+ 'vs' + " " + city_name_2 + 'Air Quality - PM2.5')
+    ax.legend(loc='best')
+    fig.tight_layout(pad=1)
+    ax = fig.add_subplot(2,1,2)
+    ax.scatter(df1['date'], df1['no2'], color = 'blue', alpha = 1, label = city_name_1 )
+    ax.scatter(df2['date'], df2['no2'], color = 'red', alpha = 1, label = city_name_2 )
+    ax.set_title(city_name_1 +" "+ 'vs' + " " + city_name_2 + 'Air Quality - NO2')
+    ax.legend(loc='best')
+    fig.tight_layout(pad=1)
+    fig.savefig(save_name, dpi=125)
+    plt.close(fig)
+
+
 
 #this function will plot moving day average  values for NO2 (default) or PM25 for the first 3 months of each year
 def q1_plotter(picklename, city_name, first_case_day = 0, shelter_day = 0, substance = 'no2', day_range = 9, firstyear = 2016):
@@ -96,17 +118,66 @@ def q1_plotter(picklename, city_name, first_case_day = 0, shelter_day = 0, subst
     plt.close(fig)
 
 
-if __name__ == '__main__':
-    for key in plot_dict.keys():
-        name, first_case_day, shelter_day = plot_dict[key]
-        q1_plotter(key, name, first_case_day, shelter_day)
-    
-    for key in plot_dict.keys():
-        name, first_case_day, shelter_day = plot_dict[key]
-        scatter_concentrations(key, name)
+#this function will create a new dataframe with 2020 daily pm25 and no2 concentrations expressed as
+#a percentage of the mean of those daily values on previous years
+def get_2020_values_as_percent(filename):
+    df = unpickle(filename)
+    # add column for year and days into a given year
+    df['year'] = df['date'].dt.year
+    df['day_of_year'] = df['date'].dt.dayofyear
+    # split into dataframes for 2020 and for all previous years
+    dfprev = df[df['year'] < 2020].sort_values('day_of_year')
+    df2020 = df[df['year'] == 2020].sort_values('day_of_year')
+    # create a new dataframe with the means of values by day of the previous years
+    dfdays = dfprev.groupby('day_of_year').mean()
+    dfdays = dfdays.sort_values('day_of_year')
+    dfdays['no2_2020'] = df2020['no2']
+    dfdays['pm25_2020'] = df2020['pm25']
+    dfdays['no2%'] = dfdays['no2_2020']/dfdays['no2']
+    dfdays['pm25%'] = dfdays['pm25_2020']/dfdays['pm25']
+    dfdays.drop(['year'], axis = 1)
+    dfq1 = dfdays[0:91].drop('year', axis=1)
+    return dfq1
 
+def plot_2020_as_percent(filename, substance = 'no2'):
+    df = get_2020_values_as_percent(filename)
+    save_name = '../images/percentage_plots/q1_2020_percentages' + filename + substance + '.png'
+    fig, ax = plt.subplots(figsize=(16,8))
+    x = np.arange(0, len(df))
+    y = (df[substance+'%'])*100
+    ax.plot(x, y, linewidth = 3)
+    ax.set_xlabel('Days Since January 1st')
+    ax.set_ylabel('2020 '+substance+' AQI as a percentage of previous years')
+    ax.axhline(100, ls='--')
+    fig.savefig(save_name, dpi=125)
+    plt.close(fig)
+
+
+if __name__ == '__main__':
+    # for key in plot_dict.keys():
+    #     name, first_case_day, shelter_day = plot_dict[key]
+    #     q1_plotter(key, name, first_case_day, shelter_day)
     
+    # for key in plot_dict.keys():
+    #     name, first_case_day, shelter_day = plot_dict[key]
+    #     scatter_concentrations(key, name)
     
+    #plot_concentrations_compare('santiago', 'Santiago de Chile', 'madrid', 'Madrid')
+
+    plot_2020_as_percent('madrid', 'no2')
+    plot_2020_as_percent('paris', 'no2')
+    plot_2020_as_percent('nyc', 'no2')  
+    plot_2020_as_percent('wuhan', 'no2')
+    plot_2020_as_percent('beijing', 'no2') 
+    plot_2020_as_percent('denver', 'no2')
+    plot_2020_as_percent('santiago', 'no2')  
+  
+ 
+  
+
+  
+  
+
     # for key in plot_dict.keys():
     #     name, first_case_day, shelter_day = plot_dict[key]
     #     q1_plotter(key, name, first_case_day, shelter_day, 'pm25')
