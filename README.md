@@ -35,7 +35,7 @@ The values for PM<sub>2.5</sub> are scaled to breakpoints that are occasionally 
 
 ![image](images/misc/aqipm2.5.png)
 
-[Source]("https://www.epa.gov/sites/production/files/2016-04/documents/2012_aqi_factsheet.pdf")
+[Source](https://www.epa.gov/sites/production/files/2016-04/documents/2012_aqi_factsheet.pdf)
 
 I decided to focus on a range of major cities in the United States along with a few relevant big cities outside of the U.S., including Wuhan, Beijing, and Milan, as well as a number of large cities in the southern hemisphere, for reasons that I will explain shortly. In addition to my local interest in Denver, I wanted to the ten largest all of the largest metropolitan areas in the U.S., but unfortunately many did not report consistent (or any) data to the World Air Quality Index Project for the types of pollution I decided to focus on. 
 
@@ -54,7 +54,7 @@ I subsequently created a pipeline script to clean other datasets and save them a
 ![image](https://upload.wikimedia.org/wikipedia/commons/0/02/Smog_over_Almaty.jpg)
 
 Smog Over Almaty, Kazakhstan 
-[Source](https://upload.wikimedia.org/wikipedia/commons/0/02/Smog_over_Almaty.jpg)
+[Source](images/misc/Smog_over_Almaty.png)
 
 
 Cities in Europe and China in the northern hemisphere seemed to generally follow the same pattern of spiking pollution in the winter, while cities in the southern hemisphere were the opposite. Below I have plotted the readings for PM<sub>2.5</sub> and NO<sub>2</sub> in Madrid and Santiago de Chile, and you can see that their peaks and valleys are opposite. 
