@@ -51,10 +51,10 @@ More significantly, I realized that a major obstacle to discerning if COVID-19 h
 
 I subsequently created a pipeline script to clean other datasets and save them as picklefiles, and generated scatterplots for a number of other cities, including in the southern hemisphere where the pattern would likely be reversed if it was driven by weather. 
 
-![image](https://upload.wikimedia.org/wikipedia/commons/0/02/Smog_over_Almaty.jpg)
+![image](images/misc/almaty.png)
 
 Smog Over Almaty, Kazakhstan 
-[Source](images/misc/Smog_over_Almaty.png)
+[Source](https://en.wikipedia.org/wiki/Inversion_(meteorology))
 
 
 Cities in Europe and China in the northern hemisphere seemed to generally follow the same pattern of spiking pollution in the winter, while cities in the southern hemisphere were the opposite. Below I have plotted the readings for PM<sub>2.5</sub> and NO<sub>2</sub> in Madrid and Santiago de Chile, and you can see that their peaks and valleys are opposite. 
