@@ -117,6 +117,29 @@ def q1_plotter(picklename, city_name, first_case_day = 0, shelter_day = 0, subst
     fig.savefig(save_name, dpi=125)
     plt.close(fig)
 
+#def q1 plotter raw (I just made this to create a few graphs to show the utility of the moving 9 day average)
+def q1_plotter_raw(picklename, city_name, substance = 'no2', firstyear = 2016):
+    df =  unpickle(picklename)
+    years = np.arange(firstyear, 2021, 1)
+    fig, ax = plt.subplots(figsize=(16,8))
+    for year in years:
+        df_q1 = df[df['date'] > datetime.datetime(year, 1, 1)]
+        df_q1 = df_q1[df_q1['date'] < datetime.datetime(year, 4, 1)]
+        x = np.arange(0, len(df_q1), 1)
+        y = df_q1[substance]
+        if year == 2020:
+            ax.plot(x, y, linewidth = 3, label = str(year))
+        else:
+            ax.plot(x, y, alpha = .5, label = str(year))
+    title_ = f'{city_name} {substance} AQI Levels in the first quarters of 2016-2020'
+    ax.set_title(title_)
+    ax.set_ylabel('AQI')
+    ax.set_xlabel('Days Into the Year')
+    ax.legend(loc='best') 
+    save_name = '../images/quarterly_plots_raw/q1raw' + picklename + substance + '.png'
+    fig.savefig(save_name, dpi=125)
+    plt.close(fig)
+   
 
 #this function will create a new dataframe with 2020 daily pm25 and no2 concentrations expressed as
 #a percentage of the mean of those daily values on previous years
@@ -164,20 +187,7 @@ if __name__ == '__main__':
     
     #plot_concentrations_compare('santiago', 'Santiago de Chile', 'madrid', 'Madrid')
 
-    plot_2020_as_percent('madrid', 'no2')
-    plot_2020_as_percent('paris', 'no2')
-    plot_2020_as_percent('nyc', 'no2')  
-    plot_2020_as_percent('wuhan', 'no2')
-    plot_2020_as_percent('beijing', 'no2') 
-    plot_2020_as_percent('denver', 'no2')
-    plot_2020_as_percent('santiago', 'no2')  
   
- 
-  
-
-  
-  
-
     # for key in plot_dict.keys():
     #     name, first_case_day, shelter_day = plot_dict[key]
     #     q1_plotter(key, name, first_case_day, shelter_day, 'pm25')
@@ -186,3 +196,6 @@ if __name__ == '__main__':
     # q1_plotter('wuhan', 'Wuhan', 0, 0)
     # q1_plotter('beijing', 'Beijing', 0, 0)
     # q1_plotter('beijing', 'Beijing', 0, 0)
+
+    q1_plotter_raw('denver', 'Denver', 'no2', 2016)
+    q1_plotter_raw('denver', 'Denver', 'pm25', 2016)
