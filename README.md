@@ -14,9 +14,7 @@ Unfortunately, the type of airborne particle that different stations report is n
 
 I had to download the datasets individually, so I decided to focus on stations that had PM<sub>2.5</sub> and  NO<sub>2</sub> dating back to 2014. The other pollutants were too sporadic to find data for in the range of cities I wanted to look at. Most NO<sub>2</sub> comes from automobile traffic and in burning fossil fuels, so it seemed like a good pollutant to focus on in addition to PM<sub>2.5</sub>. 
 
-Both NO<sub>2</sub> and PM<sub>2.5</sub> can contribute to chronic lung disease and lead to a lower quality of life and even premature death when present in sufficient quantities. 
-
-This is especially significant during the coronavirus epidemic: a study that was released on April 8th found a significant link between long term PM<sub>2.5</sub> exposure and increased mortality rates from COVID-19. 
+Both NO<sub>2</sub> and PM<sub>2.5</sub> can contribute to chronic lung disease and lead to a lower quality of life and even premature death when present in sufficient quantities.  This is especially significant during the coronavirus epidemic: a study that was released on April 8th found a significant link between long term PM<sub>2.5</sub> exposure and increased mortality rates from COVID-19. 
 
 The World Air Quality Index Project releases all of its data in AQI units. AQI units are not linearly scaled to concentrations of particulate matter, but rather to the relative levels of danger to human health.
 
@@ -25,9 +23,19 @@ The AQI values correspond to the scale below:
 
 ![image](images/misc/aqiscale.png)
 
+
+
 <a href="https://www.airnow.gov/index.cfm?action=aqibasics.aqi" >Source: Airnow.gov</a>.
 
 Originally the scale was designed to only go up to 500, but during episodes of extreme air pollution monitoring groups have extrapolated higher values.
+
+For values of less than 100, 1 AQI for NO<sub>2</sub> corresponds to roughly 1 part per billion. Above 100, however, the scale is no longer linear.  
+
+The values for PM<sub>2.5</sub> are scaled to breakpoints that are occasionally revised:
+
+![image](images/misc/aqipm2.5.png)
+
+[Source]("https://www.epa.gov/sites/production/files/2016-04/documents/2012_aqi_factsheet.pdf")
 
 I decided to focus on a range of major cities in the United States along with a few relevant big cities outside of the U.S., including Wuhan, Beijing, and Milan, as well as a number of large cities in the southern hemisphere, for reasons that I will explain shortly. In addition to my local interest in Denver, I wanted to the ten largest all of the largest metropolitan areas in the U.S., but unfortunately many did not report consistent (or any) data to the World Air Quality Index Project for the types of pollution I decided to focus on. 
 

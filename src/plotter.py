@@ -192,24 +192,29 @@ if __name__ == '__main__':
     #     name, first_case_day, shelter_day = plot_dict[key]
     #     q1_plotter(key, name, first_case_day, shelter_day)
     
-    for key in plot_dict.keys():
-        name, first_case_day, shelter_day = plot_dict[key]
-        scatter_concentrations(key, name)
+    # for key in plot_dict.keys():
+    #     name, first_case_day, shelter_day = plot_dict[key]
+    #     scatter_concentrations(key, name)
 
-    for key in plot_dict.keys():
-       name, first_case_day, shelter_day = plot_dict[key]
-       q1_plotter(key, name, first_case_day, shelter_day)
+    # for key in plot_dict.keys():
+    #    name, first_case_day, shelter_day = plot_dict[key]
+    #    q1_plotter(key, name, first_case_day, shelter_day)
 
-    for key in plot_dict.keys():
-       name, first_case_day, shelter_day = plot_dict[key]
-       q1_plotter(key, name, first_case_day, shelter_day, 'pm25')
+    # for key in plot_dict.keys():
+    #    name, first_case_day, shelter_day = plot_dict[key]
+    #    q1_plotter(key, name, first_case_day, shelter_day, 'pm25')
 
-    q1_plotter('la', 'Los Angeles', 25, 82, 'pm25', day_range=9, firstyear=2017)
+    # q1_plotter('la', 'Los Angeles', 25, 82, 'pm25', day_range=9, firstyear=2017)
 
-    plot_concentrations_compare('santiago', 'Santiago de Chile', 'madrid', 'Madrid')
+    q1_plotter('newdehli', 'New Dehli', 64, 82, 'pm25', day_range=9, firstyear=2018)
+    q1_plotter('newdehli', 'New Dehli', 64, 82, 'no2', day_range=9, firstyear=2018)
+
+
+
+    # plot_concentrations_compare('santiago', 'Santiago de Chile', 'madrid', 'Madrid')
     
-    q1_plotter_raw('denver', 'Denver', 'no2', 2016)
-    q1_plotter_raw('denver', 'Denver', 'pm25', 2016)
+    # q1_plotter_raw('denver', 'Denver', 'no2', 2016)
+    # q1_plotter_raw('denver', 'Denver', 'pm25', 2016)
   
     # for key in plot_dict.keys():
     #     name, first_case_day, shelter_day = plot_dict[key]

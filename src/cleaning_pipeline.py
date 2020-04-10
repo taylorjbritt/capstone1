@@ -65,12 +65,16 @@ file_picklename_dict = {
 'parque-o\'higgins, chile-air-quality.csv' : 'santiago',
 'chullora-sydney east, australia-air-quality.csv' : 'sydney',
 'queens-college, new york, usa-air-quality.csv' : 'nyc',
-'wuhan-air-quality (1).csv' : 'wuhan'}    
+'wuhan-air-quality (1).csv' : 'wuhan'}
+   
 
 
 if __name__ == '__main__':
     #clean_pipeline('i-25-denver, colorado, usa-air-quality.csv', 'denver')
 
-    for filename in file_picklename_dict.keys():
-        clean_pipeline(filename, file_picklename_dict[filename])
+    # for filename in file_picklename_dict.keys():
+    #     clean_pipeline(filename, file_picklename_dict[filename])
+
+
+    clean_pipeline('major-dhyan chand national stadium, delhi, delhi, india-air-quality.csv', 'newdehli')
     
